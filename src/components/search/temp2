@@ -1,0 +1,124 @@
+import React, { Component } from 'react';
+import SearchBar from './SearchBar';
+import Results from './Result'
+import Filter from './Filter';
+import { Container, Row, Col } from 'react-bootstrap';
+import axios from 'axios'
+import InputBar from '../InputBar';
+
+const styles = {
+
+  well:{
+    WebkitBoxShadow: "1px 3px 1px #9E9E9E",
+    MozBoxShadow: "1px 3px 1px #9E9E9E",
+    boxShadow: "1px 3px 1px #9E9E9E",
+  }
+
+};
+
+class Search extends Component {
+    state = {
+        results: [],
+        filtered_results: [],
+        credits_filter: [],
+        deps_filter: []
+    }
+
+    componentDidMount(){
+        const axiosOptions = {
+            url:'http://127.0.0.1:4000/search_filters',
+            method:'GET',
+            headers : {
+                'Access-Control-Allow-Origin' : '*'
+            }
+        }
+        axios(axiosOptions).then(res=>{
+            console.log(res);
+            this.setState({
+                credits_filter: res.data.credits,
+                deps_filter: res.data.deps
+            })
+        })
+    }
+
+    filter_credits = (key) => {
+        let credits_filter = credits_filter;
+        credits_filter[key] = 1-credits_filter[key];
+        this.setState({
+            credits_filter
+        });
+        var credits
+        let filtered_results = this.state.results.filter(res=>{
+            for (credits in credits_filter){
+                if (this.state.credits_filter[credits] && res.credits!=credits)
+                    return false;
+            }
+            return true;
+        })
+    }
+
+    filter_deps = (key) => {
+        let deps_filter = deps_filter;
+        deps_filter[key] = 1-deps_filter[key];
+        this.setState({
+            deps_filter
+        });
+        var dep;
+        let filtered_results = this.state.results.filter(res=>{
+            for (dep in deps_filter){
+                if (this.state.deps_filter[dep] && res.dep!=dep)
+                    return false;
+            }
+            return true;
+        })
+    }
+    
+    search_fn = (tags) => {
+        const axiosOptions = {
+            url:'http://127.0.0.1:4000/search',
+            method:'POST',
+            headers : {
+                'Access-Control-Allow-Origin' : '*'
+            },
+            data: this.state.tags
+        }
+        axios(axiosOptions).then(res=>{
+            console.log(res);
+            this.setState({
+                results:res,
+                filtered_results:res
+            })
+        })
+    }
+
+    render() {
+        return (
+            <Container fluid>
+                    <hr />
+                    <Row className="justify-content-md-center">
+                        <Col>
+                            <div styles={styles.well}>
+                                <InputBar fn={this.search_fn}/>
+                            </div>
+                        </Col>
+                    </Row>
+                    <hr />
+                <Row>
+                    <Col xs={2}>
+                        <div styles={styles.well} >
+                            <Filter filters={this.state.credits_filter} name="Credits" filter_fn={this.filter_credits} />
+                            <br/>
+                            <Filter filters={this.state.deps_filter} name="Department" filter_fn={this.filter_deps} />
+                        </div>
+                    </Col>
+                    <Col xs={10}>
+                    <Container variant="info" >
+                        <Results results={this.state.filtered_results} />
+                    </Container></Col>
+                </Row>
+            </Container>
+        )
+    }
+}
+
+export default Search;

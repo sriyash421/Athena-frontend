@@ -1,13 +1,66 @@
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+  /* font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+    sans-serif; */
+  font-family: monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  background-image: url(index.jpeg);
+  background-size: cover;
 }
 
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;
+}
+
+Table {
+  background: black;
+  opacity: 0.75;
+  color: white !important;
+  font-weight: bold;
+}
+
+div.result_box {
+  opacity: 0.75;
+  color: white !important;
+  font-weight: bold;
+  /* border: 1px solid; */
+  /* padding: 10px;
+  box-shadow: 5px 10px 8px #888888; */
+}
+
+a.result_title {
+  font-weight: bold;
+  color: #000000;
+}
+
+Button.download_button {
+  opacity: 0.75;
+}
+
+div.filter-card {
+  opacity: 0.75;
+  color: white;
+  font-weight: bold;
+  color: #000000;
+}
+
+div.chart {
+  opacity: 2;
+  font-weight: bold !important;
+  color: #000000 !important;
+  /* background-color: black; */
+  padding: 10px;
+}
+
+div.course_page {
+  opacity: 1;
+  color: white;
+  font-weight: bold;
+}
+
+div.page_title {
+  opacity: 0.85;
 }
