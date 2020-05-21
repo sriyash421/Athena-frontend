@@ -4,7 +4,6 @@ import axios from 'axios'
 
 export default function Search (props){
   const data = props.suggest
-  console.log(data);
     return (
       <ReactSearchBox
         placeholder="Search Courses"

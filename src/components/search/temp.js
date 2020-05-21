@@ -36,7 +36,6 @@ class Search extends Component {
     filter_credits = (credit, value) => {
         value = value == "on" ? true: false;
         credit = credit.id.slice(-1)
-        console.log(credit, value)
         if (value && !(credit in this.state.credits)){
             this.state.credits.push(value)
         }

@@ -1,0 +1,50 @@
+import React, { Component } from 'react';
+import renderHTML from 'react-render-html';
+
+const html_text = ('
+<body>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/1.4.8/socket.io.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.4/jquery.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function() {
+
+	var socket = io.connect("http://127.0.0.1:4000");
+
+	socket.on("connect",this.state.onConnect);
+
+	socket.on("message", (data));
+
+	$("#sendbutton").on("click", function() {
+		socket.send($("#myMessage").val());
+	});
+
+});
+</script>
+<ul id="messages"></ul>
+<input type="text" id="myMessage" />
+<button id="sendbutton">Send</button>
+</body>
+')
+
+class ChatRoom extends Component {
+    state = {
+        user_ip: null,
+        messages: [],
+        new_message: ""
+    }
+    componentDidMount(){
+        axios.get
+    }
+    connect = () => {
+        console.log("Connected");
+        this.socket.listen();
+        console.log('listening on port ', this.state.port);
+    }
+    render(){
+        return (
+            <></>
+        )
+    }
+}
+
+export default ChatRoom;

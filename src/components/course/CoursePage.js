@@ -19,25 +19,36 @@ const Keywords  = ({keys}) => {
     )
 }
 
+const Prof = ({profs}) => {
+    const proflist = profs.length ? (profs.map(prof => {
+        return(
+            <li>{prof}</li>
+        )
+    })) :(<></>)
+    return(
+        <ul>{proflist}</ul>
+    )
+}
+
 class CoursePage extends Component {
     state = {
         id: null,
         name: null,
         dep: null,
-        prof: null,
+        prof: [],
         credits: null,
         keys: [],
     }
 
     componentDidMount() {
         let id = this.props.match.params.id;
-        console.log(id, "ID")
         axios.get("http://localhost:4000/course/"+id).then(res => {
-            console.log(res.data, "CREDITS")
+            var temp = res.data.data.prof.split(",");
+            console.log(temp)
             this.setState({
                 id: res.data.data.id,
                 name: res.data.data.name,
-                prof:res.data.data.prof,
+                prof: temp,
                 keys:res.data.data.keys,
                 dep:res.data.data.dep,
                 credits:res.data.data.num_credits,
@@ -69,7 +80,7 @@ class CoursePage extends Component {
                     </Row>
                 <br /><br /><br /><br />
                 <Row>
-                    <Col xs={5}>
+                    <Col xs={6}>
                         <Table>
                             {/* <Table.Header><h4 className="text-center"><Badge variant="dark">Course Details</Badge></h4></Table.Header> */}
                             <Table.Body>
@@ -83,7 +94,7 @@ class CoursePage extends Component {
                                 </Table.Row>
                                 <Table.Row>
                                     <Table.Cell><h4 className="text-center"><Badge >Professor</Badge></h4></Table.Cell>
-                                    <Table.Cell><h4 className="text-center"><Badge >{this.state.prof}</Badge></h4></Table.Cell>
+                                    <Table.Cell><h4 className="text-center"><Badge ><Prof profs={this.state.prof} /></Badge></h4></Table.Cell>
                                 </Table.Row>
                             </Table.Body>
                         </Table>

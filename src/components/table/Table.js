@@ -12,12 +12,10 @@ class Table extends Component {
     }
 
     add_course_fn = (course) => {
-        console.log(course);
         var flag = 1;
         var i,slot;
         for (i in course.slots){
             slot = course.slots[i];
-            console.log(slot);
             if (this.state.timetable[slot]){
                 window.alert("Cannot add this course, as it clashes with another.")
                 flag = 0;
@@ -34,7 +32,6 @@ class Table extends Component {
                 x.innerHTML = course.value;
                 // x.href = "/course/"+course.value;
             }
-            // console.log("Table value",this.state.timetable[course.key]);
             this.setState({
                 timetable
             });
@@ -43,13 +40,11 @@ class Table extends Component {
 
     delete_fn = (key) => {
         const course = document.getElementById(key).innerHTML;
-        console.log("delete",course)
         var i,slot;
         let timetable = this.state.timetable;
         
         for (slot in timetable){
             // slot = timetable[i];
-            console.log(slot);    
             if (timetable[slot]==course){
                 timetable[slot]=null;
                 var x = document.getElementById(slot);
@@ -74,7 +69,6 @@ class Table extends Component {
         // });
         htmlToImage.toPng(document.getElementById('timetable_div'))
             .then(function (dataUrl) {
-            console.log(dataUrl)
             download(dataUrl, 'timetable.png');
         });
     }

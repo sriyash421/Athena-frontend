@@ -23,7 +23,7 @@ const NavBar = () => {
             <Nav>
                 <Nav.Link href="/search">Search</Nav.Link>
                 <Nav.Link href="/recommend">Recommend</Nav.Link>
-                <Nav.Link href="/table">TimeTable</Nav.Link>
+                <Nav.Link href="/table">Time Table</Nav.Link>
                 <Nav.Link href="/chat">Chat</Nav.Link>
                 <Nav.Link href="/notice">Notice</Nav.Link>
             </Nav>

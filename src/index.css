@@ -64,3 +64,28 @@ div.course_page {
 div.page_title {
   opacity: 0.85;
 }
+
+div.notice_box {
+  opacity: 0.85 !important;
+}
+
+div.notice_buttons {
+  float: right;
+  opacity: 0.85;
+}
+
+.chat_box {
+  background-color: white;
+  opacity: 0.85;
+  font-weight: solid;
+  overflow-y: scroll;
+  /* overflow-x: auto; */
+}
+
+.left_chat {
+  float: left !important;
+}
+
+.right_chat {
+  float: right !important;
+}
